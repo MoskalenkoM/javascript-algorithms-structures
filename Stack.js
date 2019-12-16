@@ -1,4 +1,4 @@
-// Stack is an abstract data type (last in - first out).
+// Stack is an abstract data type LIFO (last in - first out).
 // Стек - абстрактный тип данных (последним пришёл - первым вышел).
 
 class StackNode {

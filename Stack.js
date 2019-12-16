@@ -22,6 +22,22 @@ class Stack {
     return this.count;
   }
 
+  data() {
+    if (this.root === null) {
+      console.log('Stack is empty!');
+    } else {
+      const arrStack = [];
+      function logData(dataStack) {
+        if (dataStack !== null) {
+          arrStack.push(dataStack.value);
+          logData(dataStack.next);
+        }
+      }
+      logData(this.root);
+      console.log('Stack: ', arrStack);
+    }
+  }
+
   push(value) {
     const oldFirst = this.root;
     this.root = new StackNode(value);
@@ -44,14 +60,27 @@ class Stack {
 
 const myStack = new Stack();
 
-console.log(`first in: ${myStack.push(1)}`);
-console.log(`second in: ${myStack.push(true)}`);
-console.log(`third in: ${myStack.push(null)}`);
-console.log(`fourth in: ${myStack.push('simple string')}`);
+Object.prototype.toString = () => 'Object JavaScript';
+Array.prototype.toString = () => 'Array JavaScript';
+
+console.log(`FIRST   IN -> ${myStack.push(1)}`);
+console.log(`SECOND  IN -> ${myStack.push(true)}`);
+console.log(`THIRD   IN -> ${myStack.push('simple string')}`);
+console.log(`FOURTH  IN -> ${myStack.push(null)}`);
+console.log(`FIFTH   IN -> ${myStack.push(undefined)}`);
+console.log(`SIXTH   IN -> ${myStack.push({})}`);
+console.log(`SEVENTH IN -> ${myStack.push([])}`);
+console.log(`EIGHTH  IN -> ${myStack.push(function() {})}`);
 console.log();
-console.dir(myStack);
+myStack.data();
 console.log();
-console.log(`first out: ${myStack.pop()}`);
-console.log(`second out: ${myStack.pop()}`);
-console.log(`third out: ${myStack.pop()}`);
-console.log(`fourth out: ${myStack.pop()}`);
+console.log(`FIRST   OUT -> ${myStack.pop()}`);
+console.log(`SECOND  OUT -> ${myStack.pop()}`);
+console.log(`THIRD   OUT -> ${myStack.pop()}`);
+console.log(`FOURTH  OUT -> ${myStack.pop()}`);
+console.log(`FIFTH   OUT -> ${myStack.pop()}`);
+console.log(`SIXTH   OUT -> ${myStack.pop()}`);
+console.log(`SEVENTH OUT -> ${myStack.pop()}`);
+console.log(`EIGHTH  OUT -> ${myStack.pop()}`);
+console.log();
+myStack.data();

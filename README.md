@@ -1,6 +1,6 @@
 # JavaScript
 
-## Algorithms and data structures in JavaScript
+## Algorithms and Data Structures in JavaScript
 
 ### Algorithms
 

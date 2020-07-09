@@ -1,48 +1,29 @@
-// Stack is an abstract data type LIFO (last in - first out).
-// Стек - абстрактный тип данных (последним пришёл - первым вышел).
-
 class StackNode {
   constructor(value) {
-    this.value = value;
-    this.next = null;
+    this._value = value;
+    this._next = null;
   }
 }
 
 class Stack {
   constructor() {
-    this.root = null;
-    this.count = 0;
+    this._root = null;
+    this._size = 0;
+  }
+
+  get size() {
+    return this._size;
   }
 
   isEmpty() {
-    return this.count === 0;
-  }
-
-  size() {
-    return this.count;
-  }
-
-  data() {
-    if (this.root === null) {
-      console.log('Stack is empty!');
-    } else {
-      const arrStack = [];
-      function logData(dataStack) {
-        if (dataStack !== null) {
-          arrStack.push(dataStack.value);
-          logData(dataStack.next);
-        }
-      }
-      logData(this.root);
-      console.log('Stack: ', arrStack);
-    }
+    return this._size === 0;
   }
 
   push(value) {
-    const oldFirst = this.root;
-    this.root = new StackNode(value);
-    this.root.next = oldFirst;
-    this.count += 1;
+    const oldFirst = this._root;
+    this._root = new StackNode(value);
+    this._root._next = oldFirst;
+    this._size += 1;
     return value;
   }
 
@@ -51,36 +32,60 @@ class Stack {
       return null;
     }
 
-    const oldFirst = this.root;
-    this.root = oldFirst.next;
-    this.count -= 1;
-    return oldFirst.value;
+    const oldFirst = this._root;
+    this._root = oldFirst._next;
+    this._size -= 1;
+    return oldFirst._value;
+  }
+
+  data() {
+    if(this.isEmpty()) {
+      console.log('Stack: empty!');
+      return;
+    }
+    let arrStack = [];
+    function logData(dataStack) {
+      if (dataStack !== null) {
+        arrStack.push(dataStack._value);
+        logData(dataStack._next);
+      }
+    }
+    logData(this._root);
+    console.log('Stack: ');
+    arrStack.forEach(node => console.log(node));
+    arrStack = null;
   }
 }
 
-const myStack = new Stack();
+const stack = new Stack();
 
-Object.prototype.toString = () => 'Object JavaScript';
-Array.prototype.toString = () => 'Array JavaScript';
 
-console.log(`FIRST   IN -> ${myStack.push(1)}`);
-console.log(`SECOND  IN -> ${myStack.push(true)}`);
-console.log(`THIRD   IN -> ${myStack.push('simple string')}`);
-console.log(`FOURTH  IN -> ${myStack.push(null)}`);
-console.log(`FIFTH   IN -> ${myStack.push(undefined)}`);
-console.log(`SIXTH   IN -> ${myStack.push({})}`);
-console.log(`SEVENTH IN -> ${myStack.push([])}`);
-console.log(`EIGHTH  IN -> ${myStack.push(function() {})}`);
-console.log();
-myStack.data();
-console.log();
-console.log(`FIRST   OUT -> ${myStack.pop()}`);
-console.log(`SECOND  OUT -> ${myStack.pop()}`);
-console.log(`THIRD   OUT -> ${myStack.pop()}`);
-console.log(`FOURTH  OUT -> ${myStack.pop()}`);
-console.log(`FIFTH   OUT -> ${myStack.pop()}`);
-console.log(`SIXTH   OUT -> ${myStack.pop()}`);
-console.log(`SEVENTH OUT -> ${myStack.pop()}`);
-console.log(`EIGHTH  OUT -> ${myStack.pop()}`);
-console.log();
-myStack.data();
+console.log(`1 in: ${stack.push(1)}`);
+console.log(`2 in: ${stack.push(true)}`);
+console.log(`3 in: ${stack.push('string')}`);
+console.log(`4 in: ${stack.push(null)}`);
+console.log(`5 in: ${stack.push(undefined)}`);
+console.log(`6 in: ${stack.push({ name: 'object' })}`);
+console.log(`7 in: ${stack.push([1, 2, 3])}`);
+console.log(`8 in: ${stack.push(function func() {})}`);
+
+console.log('-'.repeat(25));
+stack.data();
+console.log('-'.repeat(25));
+console.log('размер стека: ', stack.size);
+console.log('-'.repeat(25));
+
+console.log(`1 out: ${stack.pop()}`);
+console.log(`2 out: ${stack.pop()}`);
+console.log(`3 out: ${stack.pop()}`);
+console.log(`4 out: ${stack.pop()}`);
+console.log(`5 out: ${stack.pop()}`);
+console.log(`6 out: ${stack.pop()}`);
+console.log(`7 out: ${stack.pop()}`);
+console.log(`8 out: ${stack.pop()}`);
+
+console.log('-'.repeat(25));
+stack.data();
+console.log('-'.repeat(25));
+console.log('размер стека: ', stack.size);
+console.log('-'.repeat(25));
